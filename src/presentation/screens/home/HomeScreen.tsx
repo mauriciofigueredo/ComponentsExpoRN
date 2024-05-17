@@ -1,5 +1,9 @@
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { globalStyles } from '../../../config/theme/theme';
+import { Title } from '../ui/Title';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 
 export const menuItems = [
@@ -67,16 +71,26 @@ export const menuItems = [
 ]; 
 export const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <Ionicons name="checkmark-done-outline" size={32} color="green" />
+    <SafeAreaProvider>
+    <View style={globalStyles.mainContainer}>
+      <View style={globalStyles.globalMargin}>
+        <ScrollView>
+          <Title text='Opciones de menu' safe />
+
+      {
+        menuItems.map( item => (
+          <Pressable key={item.name} style={globalStyles.btnPrimaryText}>
+            <Ionicons name={item.icon} size={32} color="green" />
+            <Title style={globalStyles.subTitle} text={item.name} icon={item.icon}/>
+          </Pressable>
+        ))
+      }
+
+        </ScrollView>
+      </View>
     </View>
+        </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
