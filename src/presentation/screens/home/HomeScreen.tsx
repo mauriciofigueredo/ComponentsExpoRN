@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { globalStyles } from '../../../config/theme/theme';
-import { Title } from '../ui/Title';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { MenuItem } from '../../ui/MenuItem';
+import { Title } from '../../ui/Title';
 // import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -70,19 +71,16 @@ export const menuItems = [
   },
 ]; 
 export const HomeScreen = () => {
+  const titulo = 'Opciones de menu'
   return (
     <SafeAreaProvider>
     <View style={globalStyles.mainContainer}>
       <View style={globalStyles.globalMargin}>
         <ScrollView>
-          <Title text='Opciones de menu' safe />
-
+        <Title text={ titulo } safe />
       {
         menuItems.map( item => (
-          <Pressable key={item.name} style={globalStyles.btnPrimaryText}>
-            <Ionicons name={item.icon} size={32} color="green" />
-            <Title style={globalStyles.subTitle} text={item.name} icon={item.icon}/>
-          </Pressable>
+          <MenuItem {...item} />
         ))
       }
 
