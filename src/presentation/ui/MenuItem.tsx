@@ -8,16 +8,20 @@ interface Props {
     name: string;
     icon: string;
     component: string;
+    isFirst?: boolean;
+    isLast?:boolean;
 }
 
-export const MenuItem = ({name, icon, component}: Props) => {
+export const MenuItem = ({name, icon, component, isFirst=false, isLast=false}: Props) => {
   return (
     <Pressable
         onPress={()=>console.log(' tab  o click')}
     >
         <View style={{
             ...styles.container,
-            backgroundColor: colors.cardBackground
+            backgroundColor: colors.cardBackground,
+            ...(isFirst && {borderTopLeftRadius: 10, borderTopRightRadius:10, paddingTop:10}),
+            ...(isLast && {borderBottomLeftRadius: 10, borderBottomRightRadius:10, paddingBottom: 10})
         }}>
             <Ionicons name={icon} size={25} style={{marginRight: 10}} color={colors.primary} />
             <Text style={{color: colors.text}}>{name}</Text>
